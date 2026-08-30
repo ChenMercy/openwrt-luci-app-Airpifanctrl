@@ -39,7 +39,7 @@ elif [ "$fanvall" = 0 ]; then
 fi
 
 while true; do
-    fanvall_conf=$(cat /etc/fanvallv.conf)
+    fanvall_conf=$(cat /etc/fanvallv.conf 2>/dev/null || printf "%s" "CPU温度")
     if [ "$fanvall_conf" = "模组温度" ]; then
         temp=$(sendat 1 'AT^CHIPTEMP?' | grep 'CHIPTEMP' | sed -n '1p' | cut -d, -f9 | sed '/^$/d')
         if [ -n "$temp" ]; then
